@@ -1,31 +1,12 @@
 # Define outputs here to expose values from your module
 # Outputs can be used by other modules or displayed after terraform apply
 
-# output "example_string" {
-#   description = "Example string output"
-#   value       = "example_value"
-# }
+output "barman_s3_bucket" {
+  description = "S3 bucket name for Barman Cloud backups"
+  value       = aws_s3_bucket.cnpg_barman_backups.bucket
+}
 
-# output "example_number" {
-#   description = "Example number output"
-#   value       = 42
-# }
-
-# output "example_list" {
-#   description = "Example list output"
-#   value       = ["item1", "item2", "item3"]
-# }
-
-# output "example_map" {
-#   description = "Example map output"
-#   value = {
-#     key1 = "value1"
-#     key2 = "value2"
-#   }
-# }
-
-# output "example_sensitive" {
-#   description = "Example sensitive output (hidden in logs)"
-#   value       = "secret_value"
-#   sensitive   = true
-# }
+output "barman_iam_role" {
+  description = "IAM role ARN for Barman Cloud"
+  value       = aws_iam_role.cnpg_barman.arn
+}
