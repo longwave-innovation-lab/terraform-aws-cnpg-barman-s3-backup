@@ -1,0 +1,74 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+# GitHub recommends pinning actions to a commit SHA.
+# To get a newer version, you will need to update the SHA.
+# You can also reference a tag or branch, but the action may change without warning.
+
+name: New Release
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - '**.tf'
+    - '**.tfvars'
+    - '**.hcl'
+    - '.terraform.lock.hcl'
+    - 'package.json'
+    - '/workflows/release.yaml'
+
+jobs:
+
+  create-release-and-tags:
+    # Prevent the action to run the first time you create it from template
+    if: github.run_number > 1
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required for creating releases
+      packages: write # Required for package publishing
+      issues: write # Required if your conventional changelog creates/updates issues
+    outputs:
+      tag: ${{ steps.changelog.outputs.tag }}
+      version: ${{ steps.changelog.outputs.version }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Debug git configuration
+      run: |
+        echo "Git remote:"
+        git remote -v
+        echo "Git config remote.origin.url:"
+        git config --get remote.origin.url
+        echo "Git config --list | grep url:"
+        git config --list | grep url || true
+
+    - name: Generate changelog
+      id: changelog
+      uses: TriPSs/conventional-changelog-action@v6.2.0
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        git-user-email: innovation_r&d@longwave.it
+        skip-version-file: true
+        skip-on-empty: false
+        preset: conventionalcommits
+        output-file: CHANGELOG.md
+
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      if: ${{steps.changelog.outputs.skipped == 'false'}}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.changelog.outputs.tag }}
+        name: ${{ steps.changelog.outputs.tag }}
+        body: ${{steps.changelog.outputs.clean_changelog}}
+        draft: false
+        prerelease: false

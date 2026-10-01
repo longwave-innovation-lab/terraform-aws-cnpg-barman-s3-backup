@@ -1,0 +1,18 @@
+# Generate me a terraform doc config file for this terraform module
+formatter: "markdown table"
+# settings:
+#   lockfile: false
+header-from: main.tf
+footer-from: ""
+
+output:
+  file: README.md
+  mode: inject
+  template: |-
+    <!-- BEGIN_TF_DOCS -->
+    {{ .Content }}
+    <!-- END_TF_DOCS -->
+
+sort:
+  enabled: true
+  by: required

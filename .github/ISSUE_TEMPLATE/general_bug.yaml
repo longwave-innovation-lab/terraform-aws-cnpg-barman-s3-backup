@@ -1,0 +1,55 @@
+name: Bug Report
+description: Notifica un bug generale
+title: "[Bug]: "
+labels:
+- "Kind/Bug"
+- "Status/Need More Info"
+body:
+- type: markdown
+  attributes:
+    value: |
+      Segui questa procedura per aprire un Bug
+- type: input
+  id: contact
+  attributes:
+    label: Dettagli contatto
+    description: "Indirizzo mail o altri metodi per contattarti:"
+    placeholder: ex. email@example.com
+  validations:
+    required: false
+- type: textarea
+  id: what-happened
+  attributes:
+    label: "Cos'è accaduto:"
+    description: "Descrivi cosa è accaduto e cosa ti saresti aspettato accadesse."
+    placeholder: Descrivi cosa l'accaduto.
+    value: "A bug happened!"
+  validations:
+    required: true
+
+- type: dropdown
+  id: environment
+  attributes:
+    label: Quale ambito riguarda?
+    multiple: true
+    options:
+    - Terraform
+    - AWS
+    - Configurazione Errata
+    - Problema di Sicurezza
+
+- type: textarea
+  id: logs
+  attributes:
+    label: Log output utili
+    description: Copia e incolla i log raccolti che ti sembrano utili. Saranno automaticamente formattati come codice.
+    render: shell
+
+# - type: checkboxes
+#   id: terms
+#   attributes:
+#     label: Code of Conduct
+#     description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
+#     options:
+#     - label: I agree to follow this project's Code of Conduct
+#       required: true

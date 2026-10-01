@@ -1,0 +1,27 @@
+name: Feature Request
+description: Richiedi una Feature Request
+title: "[Feature Request]: "
+labels:
+- Kind/Feature
+body:
+- type: markdown
+  attributes:
+    value: |
+      Segui questa procedura per aprire una Feature Request!
+- type: input
+  id: contact
+  attributes:
+    label: Dettagli del contatto
+    description: come possiamo raggiungerti nel caso avessimo bisogno di maggiori informazioni?
+    placeholder: ex. email@example.com
+  validations:
+    required: false
+- type: textarea
+  id: what-you-want
+  attributes:
+    label: Quale feature vorresti fosse aggiunta?
+    description: Potresti indicarci quale feature desidereresti e come vorresti venisse implementata?
+    placeholder: Dicci cosa vorresti!
+    value: "Spiega il più dettagliatamente possibile."
+  validations:
+    required: true
