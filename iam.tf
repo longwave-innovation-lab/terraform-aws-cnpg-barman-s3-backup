@@ -45,12 +45,12 @@ data "aws_iam_policy_document" "pod_identity_trust" {
 }
 
 resource "aws_iam_policy" "cnpg_barman" {
-  name_prefix = "${var.cnpg_cluster_namespace}-cnpg-barman"
+  name_prefix = "${local.prefix_to_use}-cnpg-barman"
   policy      = data.aws_iam_policy_document.cnpg_barman.json
 }
 
 resource "aws_iam_role" "cnpg_barman" {
-  name_prefix        = var.cnpg_cluster_namespace
+  name_prefix        = local.prefix_to_use
   assume_role_policy = data.aws_iam_policy_document.pod_identity_trust.json
 }
 
