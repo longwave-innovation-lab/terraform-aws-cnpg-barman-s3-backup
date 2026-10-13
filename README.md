@@ -85,6 +85,7 @@ No modules.
 | <a name="input_eks_cluster_name"></a> [eks\_cluster\_name](#input\_eks\_cluster\_name) | The name of the EKS cluster | `string` | n/a | yes |
 | <a name="input_additional_s3_retention_days_for_current_versions"></a> [additional\_s3\_retention\_days\_for\_current\_versions](#input\_additional\_s3\_retention\_days\_for\_current\_versions) | Number of days after the Barman retention window to expire current S3 objects. | `number` | `7` | no |
 | <a name="input_barman_retention_days"></a> [barman\_retention\_days](#input\_barman\_retention\_days) | Number of days Barman retains backups. Used to configure S3 lifecycle rules and object lock retention. | `number` | `180` | no |
+| <a name="input_cnpg_custom_name"></a> [cnpg\_custom\_name](#input\_cnpg\_custom\_name) | Custom name for the CNPG cluster, used to create S3 bucket, iam role and other resources in case the namespace name cannot be used. | `string` | `""` | no |
 | <a name="input_days_retention_multiplier_for_noncurrent_versions"></a> [days\_retention\_multiplier\_for\_noncurrent\_versions](#input\_days\_retention\_multiplier\_for\_noncurrent\_versions) | Multiplier for the Barman retention window to determine how long noncurrent S3 versions are kept. | `number` | `2` | no |
 | <a name="input_s3_aws_backup_tags"></a> [s3\_aws\_backup\_tags](#input\_s3\_aws\_backup\_tags) | A map of tags to apply to the S3 bucket so that AWS Backup can select them in backup plans | `map(string)` | `{}` | no |
 

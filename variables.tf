@@ -10,6 +10,12 @@ variable "cnpg_cluster_namespace" {
   description = "The namespace of the CNPG cluster, which will be used to create IAM roles resource and the S3 bucket"
 }
 
+variable "cnpg_custom_name" {
+  type        = string
+  description = "Custom name for the CNPG cluster, used to create S3 bucket, iam role and other resources in case the namespace name cannot be used."
+  default     = ""
+}
+
 variable "eks_cluster_name" {
   type        = string
   description = "The name of the EKS cluster"

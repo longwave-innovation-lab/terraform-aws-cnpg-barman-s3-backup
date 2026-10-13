@@ -1,7 +1,7 @@
 # S3 bucket for CNPG barman cloud backups
 # object_lock_enabled must be set at bucket creation time and cannot be changed later
 resource "aws_s3_bucket" "cnpg_barman_backups" {
-  bucket_prefix       = "${var.cnpg_cluster_namespace}-backups"
+  bucket_prefix       = "${local.prefix_to_use}-backups"
   object_lock_enabled = true
   tags                = var.s3_aws_backup_tags
 }
